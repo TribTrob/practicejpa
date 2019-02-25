@@ -5,9 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,4 +18,10 @@ public class Season {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Enumerated
+    private SeasonNumber seasonNumber;
+
+    @ManyToOne
+    private Set<Series> series;
 }
