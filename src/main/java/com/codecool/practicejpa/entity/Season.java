@@ -23,5 +23,9 @@ public class Season {
     private SeasonNumber seasonNumber;
 
     @ManyToOne
-    private Set<Series> series;
+    private Series series;
+
+    @OneToMany(mappedBy = "season", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Set<Episode> episodes;
+
 }

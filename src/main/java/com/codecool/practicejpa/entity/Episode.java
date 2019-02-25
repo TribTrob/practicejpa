@@ -1,13 +1,9 @@
 package com.codecool.practicejpa.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,5 +16,13 @@ public class Episode {
     @GeneratedValue
     private Long id;
 
+    private String title;
+
+    @ElementCollection
+    @Singular
+    private List<String> actors;
+
+    @ManyToOne
+    private Season season;
 
 }
