@@ -39,19 +39,25 @@ public class PracticejpaApplication {
     @Bean
     public CommandLineRunner init(){
         return args -> {
-            Set<Episode> episodes = IntStream.range(1,10)
-                    .boxed()
-                    .map(integer -> Episode.builder().title("Episode"+ integer).actor("Sanyi").actor("Béla").build())
-                    .collect(Collectors.toSet());
-            Set<Season> seasons = new HashSet<>();
+            Series series = Series.builder().seriesName("Sanyi kalandjai").build();
 
-            Season season1 = Season.builder().episodes(episodes).seasonNumber(SeasonNumber.SEASON1).build();
-            seasons.add(season1);
-            Series sanyi_kalandjai = Series.builder().seriesName("Sanyi Kalandjai").seasons(seasons).build();
+            Season season = Season.builder()
+                    .seasonNumber(SeasonNumber.SEASON1)
+                    .series(series)
+                    .build();
 
-            seriesRepository.save(sanyi_kalandjai);
+            Episode episode = Episode.builder()
+                    .season(season)
+                    .actor("János")
+                    .actor("Géza")
+                    .title("János és Géza")
+                    .build();
 
+            seriesRepository.save(series);
 
+            seasonRepository.save(season);
+
+            episodeRepository.save(episode);
         };
     }
 
